@@ -2,6 +2,11 @@
 
 return 
 [
+    '' =>
+    [
+        'controller' => 'main',
+        'action' => 'index',
+    ],
     'account/login' => 
     [
         'controller' => 'test',

@@ -26,12 +26,36 @@ class Router
 
     public function match()
     {
-        $url = $_SERVER['REQUEST_URI'];
+        $url = trim($_SERVER['REQUEST_URI'], '/');
+        foreach ($this->routes as $route => $params)
+        {
+            if(preg_match($route, $url, $matches))
+            {
+                $this->params = $params;
+               return true;
+            }
+        }
+        return false;
     }
 
     public function run()
     {
-        echo 'start';
+       if($this->match())
+       {
+           $controller = 'application\controllers\\'.ucfirst($this->params['controller']).'Controller.php';
+           if(class_exists($controller))
+           {
+                echo 'ok';
+           }
+           else
+           {
+               echo 'Не найден: '.$controller;
+           }
+       }
+       else
+       {
+           echo 'Маршрут не найден!';
+       }
     }
 
 }
