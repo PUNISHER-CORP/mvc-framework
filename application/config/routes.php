@@ -2,20 +2,23 @@
 
 return 
 [
+
     '' =>
     [
         'controller' => 'main',
         'action' => 'index',
     ],
+
     'account/login' => 
     [
-        'controller' => 'test',
+        'controller' => 'account',
         'action' => 'login',
     ],
 
-    'news/show' => 
+    'account/register' => 
     [
-        'controller' => 'news',
-        'action' => 'show',
+        'controller' => 'account',
+        'action' => 'register',
     ],
+    
 ];

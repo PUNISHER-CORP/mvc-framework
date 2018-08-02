@@ -11,7 +11,6 @@ class Router
     public function __construct() 
     {
         $arr = require 'application/config/routes.php';
-        //debug($arr);
         foreach($arr as $key => $val)
         {
             $this->add($key, $val);
@@ -32,7 +31,7 @@ class Router
             if(preg_match($route, $url, $matches))
             {
                 $this->params = $params;
-               return true;
+                return true;
             }
         }
         return false;
@@ -42,14 +41,23 @@ class Router
     {
        if($this->match())
        {
-           $controller = 'application\controllers\\'.ucfirst($this->params['controller']).'Controller.php';
-           if(class_exists($controller))
+           $path = 'application\controllers\\'.ucfirst($this->params['controller']).'Controller';
+           if(class_exists($path))
            {
-                echo 'ok';
+               $action = $this->params['action'].'Action';
+                if(method_exists($path, $action))
+                {
+                    $controller = new $path($this->params);
+                    $controller->$action();
+                }
+                else
+                {
+                    echo 'Не найден екшен: '.$path;
+                }
            }
            else
            {
-               echo 'Не найден: '.$controller;
+               echo 'Не найден контроллер: '.$path;
            }
        }
        else
