@@ -2,6 +2,8 @@
 
 namespace application\core;
 
+use application\core\View;
+
 class Router
 {
 
@@ -52,17 +54,17 @@ class Router
                 }
                 else
                 {
-                    echo 'Не найден екшен: '.$path;
+                   View::errorCode(404);
                 }
            }
            else
            {
-               echo 'Не найден контроллер: '.$path;
+                View::errorCode(404);
            }
        }
        else
        {
-           echo 'Маршрут не найден!';
+            View::errorCode(404);
        }
     }
 
