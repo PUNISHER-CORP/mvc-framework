@@ -9,7 +9,7 @@ class AccountController extends Controller
     
     public function loginAction()
     {
-        $this->view->render('Авторизация');
+        $this->view->render('Вход');
     }
 
     public function registerAction()

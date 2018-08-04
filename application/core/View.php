@@ -19,8 +19,7 @@ class View
     {
         extract($vars);
         $path = 'application/views/'.$this->path.'.php';
-        if (file_exists($path))
-        {
+        if (file_exists($path)) {
             ob_start();
             require $path;
             $content = ob_get_clean();
@@ -32,8 +31,7 @@ class View
     {
         http_response_code($code);
         $path = 'application/views/errors/'.$code.'.php';
-        if(file_exists($path))
-        {
+        if(file_exists($path)) {
             require $path;
         }
         exit;
@@ -43,5 +41,15 @@ class View
     {
         header('location: '.$url);
         exit;
+    }
+
+    public function message($status, $message)
+    {
+        exit(json_encode(['status' => $status, 'message' => $message]));
+    }
+
+    public function location($url)
+    {
+        exit(json_encode(['url' => $url]));
     }
 }
