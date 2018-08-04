@@ -3,3 +3,5 @@
 .idea/portfolio.iml
 .idea/modules.xml
 .idea/misc.xml
+.gitignore
+.htaccess
