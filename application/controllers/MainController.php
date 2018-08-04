@@ -3,13 +3,23 @@
 namespace application\controllers;
 
 use application\core\Controller;
+use application\lib\Db;
 
 class MainController extends Controller
 {
     
     public function indexAction()
     {
-       $this->view->render('Главная страница');
+        $db = new Db;
+
+        $params =
+        [
+            'id' => 1,
+        ];
+
+        $data = $db->column('SELECT name FROM users WHERE id = :id', $params);
+        debug($data);
+        $this->view->render('Главная страница');
     }
 
 }
